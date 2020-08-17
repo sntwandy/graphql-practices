@@ -1,0 +1,26 @@
+[
+  {
+    "title": "GraphQL Course",
+    "teacher": "GNDX",
+    "description": "GraphQL API",
+    "topic": "Programming"
+  },
+  {
+    "title": "JavaScript Course",
+    "teacher": "Diego DeGranda",
+    "description": "JavaScript Professional",
+    "topic": "Programming"
+  },
+  {
+    "title": "ReactJS Course",
+    "teacher": "Sparragus",
+    "description": "ReactJS Professional",
+    "topic": "Programming"
+  },
+  {
+    "title": "Web Online Development Course",
+    "teacher": "Leonidas Esteban",
+    "description": "Develop your own website",
+    "topic": "Programming"
+  }
+]

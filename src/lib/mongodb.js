@@ -8,13 +8,13 @@ const DB_NAME = config.dbName;
 const DB_HOST = config.dbHost;
 
 // Mongo URI
-const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${DB_HOST}:${config.port}/${DB_NAME}?retryWrites=true&w=majority`;
+const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${DB_HOST}/${DB_NAME}?retryWrites=true&w=majority`;
 
 // Connection to Mongo
 class MongoLib {
 
   constructor() {
-    this.client = new MongoClient(MONGO_URI, { useNewUrlParser: true } );
+    this.client = new MongoClient(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
     this.dbName = DB_NAME;
   };
 
@@ -24,15 +24,15 @@ class MongoLib {
         this.client.connect( err => {
           if(err) {
             reject(err);
-          }
-          console.log('Connected succesfully to mongo');
-          resolve(this.client.db(this.dbName));
-        } );
+          } else {
+            console.log('Connected succesfully to mongo');
+            resolve(this.client.db(this.dbName));
+          };
+        });
       });
-    }
+    };
     return MongoLib.connection;
   };
-
 };
 
 module.exports = MongoLib;

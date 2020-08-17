@@ -1,43 +1,29 @@
-const courses = [
-  {
-    _id: '1',
-    title: 'GraphQL Course',
-    teacher: 'GNDX',
-    description: 'GraphQL API',
-    topic: 'Programming'
-  },
-  {
-    _id: '2',
-    title: 'JavaScript Course',
-    teacher: 'Diego DeGranda',
-    description: 'JavaScript Professional',
-    topic: 'Programming'
-  },
-  {
-    _id: '3',
-    title: 'ReactJS Course',
-    teacher: 'Sparragus',
-    description: 'ReactJS Professional',
-    topic: 'Programming'
-  },
-  {
-    _id: '4',
-    title: 'Web Online Development Course',
-    teacher: 'Leonidas Esteban',
-    description: 'Develop your own website',
-    topic: 'Programming'
-  }
-]
+const DBConnect = require('./mongodb');
+const { ObjectId} = require('mongodb');
 
 module.exports = {
   Query: {
     //Return all the courses
-    getCourses: () => {
-      return courses;
+    getCourses: async () => {
+      try {
+        let db= await new DBConnect().connect(); // Create Connection
+        let courses = await db.collection('courses').find().toArray(); // Get courses
+        // Return the data courses
+        return await courses;
+      } catch(error) {
+        console.error(error.message);
+      }
     },
-    getCourse: (root, args) => {
-      const course = courses.find(course => course._id === args.id);
-      return course;
+    // Return a course
+    getCourse: async (root, { id }) => {
+      try {
+        let db = await new DBConnect().connect(); // Create DB Instance
+        let course = await db.collection('courses').findOne({ _id: ObjectId(id) }); // Get the course
+        // Return the data course
+        return await course;
+      } catch(error) {
+        console.error(error.message);
+      }
     }
   }
 }
