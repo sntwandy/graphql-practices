@@ -23,5 +23,27 @@ module.exports = {
     } catch(error) {
       console.error(error.message);
     }
-  }
+  },
+  //Return all the students
+  getStudents: async () => {
+    try {
+      let db= await new DBConnect().connect(); // Create Connection
+      let students = await db.collection('students').find().toArray(); // Get courses
+      // Return the data courses
+      return await students;
+    } catch(error) {
+      console.error(error.message);
+    }
+  },
+  // Return a student
+  getStudent: async (root, { id }) => {
+    try {
+      let db = await new DBConnect().connect(); // Create DB Instance
+      let student = await db.collection('students').findOne({ _id: ObjectId(id) }); // Get the course
+      // Return the data course
+      return await student;
+    } catch(error) {
+      console.error(error.message);
+    }
+  },
 }
