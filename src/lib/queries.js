@@ -1,5 +1,6 @@
 const DBConnect = require('./mongodb');
 const { ObjectId} = require('mongodb');
+const errorHandler = require('./errorHandler');
 
 module.exports = {
   //Return all the courses
@@ -10,7 +11,7 @@ module.exports = {
       // Return the data courses
       return await courses;
     } catch(error) {
-      console.error(error.message);
+      errorHandler(error);
     }
   },
   // Return a course
@@ -21,7 +22,7 @@ module.exports = {
       // Return the data course
       return await course;
     } catch(error) {
-      console.error(error.message);
+      errorHandler(error);
     }
   },
   //Return all the students
@@ -32,7 +33,7 @@ module.exports = {
       // Return the data courses
       return await students;
     } catch(error) {
-      console.error(error.message);
+      errorHandler(error);
     }
   },
   // Return a student
@@ -43,7 +44,7 @@ module.exports = {
       // Return the data course
       return await student;
     } catch(error) {
-      console.error(error.message);
+      errorHandler(error);
     }
   },
 }

@@ -1,5 +1,6 @@
 const DBConnect = require('./mongodb');
 const { ObjectId } = require('mongodb');
+const errorHandler = require('./errorHandler');
 
 module.exports = {
   Course: {
@@ -10,7 +11,7 @@ module.exports = {
         let studentData = ids.length > 0 ? await db.collection('students').find({ _id: { $in: ids } }).toArray() : [];
         return await studentData;
       } catch(error) {
-        console.error(error.message);
+        errorHandler(error);
       };
     }
   }

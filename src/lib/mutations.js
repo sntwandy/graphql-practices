@@ -1,5 +1,6 @@
 const DBConnect = require('./mongodb');
 const { ObjectId } = require('mongodb');
+const errorHandler = require('./errorHandler');
 
 module.exports = {
   // Create a course
@@ -17,7 +18,7 @@ module.exports = {
       // Return the course created
       return await newCourse;
     } catch(error) {
-      console.error(error.message);
+      errorHandler(error);
     }
   },
   // Edit a course
@@ -28,7 +29,7 @@ module.exports = {
       let course = await db.collection('courses').findOne({ _id: ObjectId(_id) }); // get the course that was updated
       return await course; // Return the course that was updated
     } catch(error) {
-      console.error(error.message);
+      errorHandler(error);
     }
   },
   // Delete a course
@@ -38,7 +39,7 @@ module.exports = {
       await db.collection('courses').deleteOne({ _id: ObjectId(_id) });
       return 'Student was deleted successfully'
     } catch(error) {
-      console.error(error.message);
+      errorHandler(error);
     }
   },
   // Create a student
@@ -51,7 +52,7 @@ module.exports = {
       // Return the course created
       return await input;
     } catch(error) {
-      console.error(error.message);
+      errorHandler(error);
     }
   },
   // Edit a student
@@ -62,7 +63,7 @@ module.exports = {
       let student = await db.collection('students').findOne({ _id: ObjectId(_id) }); // get the student that was updated
       return await student; // Return the student that was updated
     } catch(error) {
-      console.error(error.message);
+      errorHandler(error);
     }
   },
   // Delete a student
@@ -72,7 +73,7 @@ module.exports = {
       await db.collection('students').deleteOne({ _id: ObjectId(_id) });
       return 'Student was deleted successfully'
     } catch(error) {
-      console.error(error.message);
+      errorHandler(error);
     }
   },
   // Add a student to a course
@@ -91,7 +92,7 @@ module.exports = {
 
       return await 'The student was added successfully'
     } catch(error) {
-      console.error(error.message);
+      errorHandler(error);
     }
   }
 };
