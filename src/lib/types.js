@@ -14,5 +14,14 @@ module.exports = {
         errorHandler(error);
       };
     }
+  },
+  Person: {
+    __resolveType: (student, context, info) => {
+      if (student.phone) {
+        return 'Monitor'
+      }
+
+      return 'Student'
+    }
   }
 };
