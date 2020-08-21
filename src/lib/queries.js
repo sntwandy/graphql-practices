@@ -47,4 +47,17 @@ module.exports = {
       errorHandler(error);
     }
   },
+  // Search an item
+  searchItems: async (root, { keyword }) => {
+    try {
+      let db = await new DBConnect().connect();
+      let courses = await db.collection('courses').find({ $text: { $search: keyword } }).toArray();
+      let students = await db.collection('students').find({ $text: { $search: keyword } }).toArray();
+      let items = [...courses, ...students];
+
+      return items;
+    } catch(error) {
+      errorHandler(error);
+    }
+  }
 }

@@ -23,5 +23,18 @@ module.exports = {
 
       return 'Student'
     }
+  },
+  GlobalSearch: {
+    __resolveType: (item, contex, info) => {
+      if(item.title) {
+        return 'Course'
+      }
+
+      if(item.phone) {
+        return 'Monitor'
+      }
+
+      return 'Student'
+    }
   }
 };
